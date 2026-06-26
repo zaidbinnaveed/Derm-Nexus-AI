@@ -1,0 +1,11 @@
+{
+  "name": "derm-ai-nexus-workspace",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "install:all": "npm install --prefix frontend",
+    "dev": "node scripts/dev-launcher.mjs",
+    "build": "npm run build --prefix frontend",
+    "start": "npm run start --prefix frontend"
+  }
+}

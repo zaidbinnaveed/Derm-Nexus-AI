@@ -1,0 +1,178 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+
+\definecolor{deepblack}{HTML}{0A0A0A}
+\definecolor{richblack}{HTML}{111111}
+\definecolor{bloodred}{HTML}{8B0000}
+\definecolor{crimson}{HTML}{C8102E}
+\definecolor{softwhite}{HTML}{F5F5F5}
+\definecolor{trustcyan}{HTML}{5FD1E6}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=crimson,
+    urlcolor=trustcyan
+}
+
+\pagecolor{deepblack}
+\color{softwhite}
+\setstretch{1.15}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{crimson}{Derm AI Nexus}}
+\fancyhead[R]{\textcolor{trustcyan}{Project Report}}
+\fancyfoot[C]{\textcolor{softwhite}{\thepage}}
+
+\titleformat{\section}{\Large\bfseries\color{crimson}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{trustcyan}}{\thesubsection}{1em}{}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \vspace*{2.4cm}
+    {\Huge\bfseries\textcolor{crimson}{Derm AI Nexus}\par}
+    \vspace{0.8cm}
+    {\Large\textcolor{softwhite}{Seeing Beyond the Surface --- Early Detection. Lifesaving Precision.}\par}
+    \vspace{1.6cm}
+    {\large\textcolor{trustcyan}{Luxury Cinematic Frontend for AI-Assisted Skin Cancer Screening}\par}
+    \vfill
+    \begin{tcolorbox}[colback=richblack,colframe=crimson,boxrule=0.8pt,width=0.85\textwidth]
+    \centering
+    \textbf{Prepared For:} Viva / Examiner Evaluation \\
+    \textbf{Project Type:} Production-Grade Frontend Engineering and UI/UX Design \\
+    \textbf{Stack:} Next.js (App Router), TypeScript, Tailwind CSS, OpenAI API
+    \end{tcolorbox}
+    \vfill
+    {\large \today \par}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Executive Overview}
+Derm AI Nexus is a premium medical AI web interface designed to provide a calm, trustworthy, and visually impactful experience for skin lesion triage. The frontend combines cinematic design language with clinically meaningful interactions, including image upload, enhancement, lesion annotation overlays, and an empathetic AI dermatologist assistant.
+
+\section{Objectives}
+\begin{itemize}[leftmargin=1.5em]
+    \item Deliver a jaw-dropping, examiner-ready frontend with dark medical luxury aesthetics.
+    \item Enable intuitive lesion image analysis through upload, enhancement, and visualization.
+    \item Provide contextual AI communication that explains findings in patient-friendly language.
+    \item Maintain performance, responsive behavior, and accessibility-focused interaction patterns.
+\end{itemize}
+
+\section{Design Language and Visual System}
+\subsection{Theme Palette}
+\begin{itemize}[leftmargin=1.5em]
+    \item Core Background: \texttt{\#0A0A0A}, \texttt{\#111111}
+    \item Medical Accent Reds: \texttt{\#8B0000}, \texttt{\#C8102E}
+    \item Trust Accent: Soft cyan for guidance and calm technical cues
+    \item Typography Contrast: Soft white foreground for readability
+\end{itemize}
+
+\subsection{Visual Motifs}
+\begin{itemize}[leftmargin=1.5em]
+    \item Neural-cell inspired radial gradients and subtle background grid.
+    \item Glassmorphism information panels with cinematic depth and blur.
+    \item Animated DNA-style loading rings for medical analysis feedback.
+    \item Pulsing red lesion overlays to draw attention without visual harshness.
+\end{itemize}
+
+\section{Implemented Core Features}
+\subsection{Hero Landing Section}
+\begin{itemize}[leftmargin=1.5em]
+    \item Full-width cinematic hero with immersive gradients and panel glow.
+    \item High-impact tagline and action-driven CTA buttons with hover micro-feedback.
+    \item Immediate brand identity focused on early detection and precision care.
+\end{itemize}
+
+\subsection{Image Upload and Analysis Experience}
+\begin{itemize}[leftmargin=1.5em]
+    \item Drag-and-drop and click upload in a clinically styled dropzone.
+    \item Client-side enhancement pipeline using canvas filters for clearer lesion texture.
+    \item Progressive loading states with medically inspired animation and language.
+    \item Side-by-side rendering of Original, Enhanced, and Annotated outputs.
+    \item Interactive suspicious-region overlays with confidence and risk cues.
+\end{itemize}
+
+\subsection{AI Dermatology Chatbot}
+\begin{itemize}[leftmargin=1.5em]
+    \item Conversational UI with empathetic, doctor-like communication tone.
+    \item Context-aware prompts include uploaded-image state, region list, and active lesion.
+    \item Region click events trigger immediate explanations and actionable guidance.
+    \item OpenAI integration via secure server route with fallback response strategy.
+\end{itemize}
+
+\section{Technical Architecture}
+\subsection{Frontend}
+\begin{itemize}[leftmargin=1.5em]
+    \item Framework: Next.js App Router + TypeScript
+    \item Styling: Tailwind CSS v4 + custom global animation/theming layer
+    \item State: React client state optimized for analysis and conversational flow
+\end{itemize}
+
+\subsection{Backend Route}
+\begin{itemize}[leftmargin=1.5em]
+    \item Endpoint: \texttt{/api/chat}
+    \item Handles OpenAI API call with contextual system prompts
+    \item Enforces safe communication style and non-diagnostic language constraints
+\end{itemize}
+
+\section{Accessibility and Responsiveness}
+\begin{itemize}[leftmargin=1.5em]
+    \item Mobile-to-desktop responsive layout using flexible grid and spacing.
+    \item Semantic markup for upload controls and chat form interactions.
+    \item High contrast palette and readable typography hierarchy.
+    \item Keyboard-friendly controls and descriptive labels for primary actions.
+\end{itemize}
+
+\section{Setup and Running Instructions}
+\subsection{Prerequisites}
+\begin{itemize}[leftmargin=1.5em]
+    \item Node.js (modern LTS recommended)
+    \item npm
+\end{itemize}
+
+\subsection{Installation}
+\begin{tcolorbox}[colback=richblack,colframe=trustcyan,boxrule=0.6pt]
+\texttt{npm install}
+\end{tcolorbox}
+
+\subsection{Environment Configuration}
+Create a \texttt{.env.local} file in project root:
+\begin{tcolorbox}[colback=richblack,colframe=crimson,boxrule=0.6pt]
+\texttt{OPENAI\_API\_KEY=your\_openai\_api\_key\_here}
+\end{tcolorbox}
+
+\subsection{Development Run}
+\begin{tcolorbox}[colback=richblack,colframe=trustcyan,boxrule=0.6pt]
+\texttt{npm run dev}
+\end{tcolorbox}
+Then open \url{http://localhost:3000}.
+
+\subsection{Production Build}
+\begin{tcolorbox}[colback=richblack,colframe=crimson,boxrule=0.6pt]
+\texttt{npm run build}\\
+\texttt{npm run start}
+\end{tcolorbox}
+
+\section{Project Cleanup Summary}
+Default boilerplate visual assets and placeholder interface content were removed. The final structure keeps only essential production files and documentation artifacts:
+\begin{itemize}[leftmargin=1.5em]
+    \item Removed default SVG starter assets from \texttt{public/}
+    \item Replaced generated starter page with purpose-built application experience
+    \item Added dedicated documentation files: \texttt{README.md}, \texttt{PROJECT\_STRUCTURE.md}, and this report
+\end{itemize}
+
+\section{Conclusion}
+Derm AI Nexus delivers a premium, emotionally resonant, and clinically oriented frontend experience that blends design excellence with practical medical AI workflow support. The final implementation is viva-ready, visually distinctive, and structured for further production expansion.
+
+\end{document}

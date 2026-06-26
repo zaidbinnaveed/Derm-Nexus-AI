@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pth
+*.pkl
+
+# Node
+frontend/node_modules/
+frontend/.next/
+frontend/.env.local
+
+# Data
+Test data/
+data/
+
+# Outputs
+outputs/

@@ -1,0 +1,289 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0a;
+  --surface: #111111;
+  --foreground: #f4f4f5;
+  --blood-red: #8b0000;
+  --crimson: #c8102e;
+  --trust-cyan: #5fd1e6;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), Arial, sans-serif;
+  overflow-x: hidden;
+  perspective: 1000px;
+}
+
+.hero-bg {
+  background:
+    radial-gradient(circle at 15% 20%, rgb(139 0 0 / 40%), transparent 35%),
+    radial-gradient(circle at 88% 26%, rgb(200 16 46 / 34%), transparent 30%),
+    radial-gradient(circle at 45% 10%, rgb(96 0 0 / 20%), transparent 25%),
+    radial-gradient(circle at 50% 80%, rgb(95 209 230 / 9%), transparent 40%),
+    linear-gradient(160deg, #040404 0%, #090909 45%, #110809 100%);
+}
+
+.medical-grid {
+  background-image:
+    linear-gradient(rgb(255 255 255 / 4%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 4%) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.neural-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(0.2px);
+}
+
+.neural-node {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: radial-gradient(circle, #ff5370, #790010);
+  box-shadow:
+    0 0 13px rgb(200 16 46 / 75%),
+    0 0 30px rgb(95 209 230 / 22%);
+  animation: node-pulse 3.8s ease-in-out infinite;
+}
+
+.neural-node::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 160px;
+  height: 1px;
+  background: linear-gradient(to right, rgb(200 16 46 / 30%), transparent);
+  transform-origin: left;
+  transform: rotate(-26deg);
+}
+
+.glass-panel {
+  background: linear-gradient(120deg, rgb(255 255 255 / 6%), rgb(255 255 255 / 1%));
+  border: 1px solid rgb(255 255 255 / 8%);
+  box-shadow:
+    0 24px 70px rgb(0 0 0 / 68%),
+    inset 0 0 0 1px rgb(200 16 46 / 12%);
+  backdrop-filter: blur(18px);
+}
+
+.parallax-panel {
+  transform-style: preserve-3d;
+  transform: rotateX(var(--tilt-y)) rotateY(var(--tilt-x)) translateZ(0);
+  transition: transform 260ms ease-out;
+}
+
+.parallax-card {
+  transform: translate3d(calc(var(--shift-x) * 0.2), calc(var(--shift-y) * 0.2), 0);
+  transition: transform 220ms ease;
+}
+
+.hero-title {
+  text-wrap: balance;
+  text-shadow:
+    0 0 20px rgb(200 16 46 / 28%),
+    0 0 45px rgb(95 209 230 / 12%);
+}
+
+.hero-hologram {
+  background:
+    linear-gradient(115deg, rgb(255 255 255 / 6%) 8%, transparent 22%),
+    linear-gradient(160deg, transparent 40%, rgb(200 16 46 / 12%) 60%, transparent 78%);
+  mix-blend-mode: screen;
+}
+
+.blood-glow {
+  box-shadow:
+    0 0 0 1px rgb(200 16 46 / 40%),
+    0 0 32px rgb(139 0 0 / 34%),
+    inset 0 0 18px rgb(200 16 46 / 20%);
+}
+
+.cinematic-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.cinematic-button::after {
+  content: "";
+  position: absolute;
+  top: -180%;
+  left: -30%;
+  width: 35%;
+  height: 450%;
+  background: linear-gradient(to right, transparent, rgb(255 255 255 / 65%), transparent);
+  transform: rotate(22deg);
+  transition: left 460ms ease;
+}
+
+.cinematic-button:hover::after {
+  left: 118%;
+}
+
+.animated-dna {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-dna::before,
+.animated-dna::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  border-radius: 999px;
+  border: 2px dashed rgb(95 209 230 / 36%);
+  animation: helix 10s linear infinite;
+}
+
+.animated-dna::after {
+  border-color: rgb(200 16 46 / 40%);
+  animation-direction: reverse;
+  animation-duration: 8s;
+}
+
+.pulse {
+  animation: pulse-ring 2.6s ease-in-out infinite;
+}
+
+.logo-orb {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 35% 35%, rgb(255 255 255 / 95%), rgb(95 209 230 / 72%) 44%, rgb(15 16 18) 72%);
+  box-shadow:
+    0 0 0 2px rgb(255 255 255 / 15%),
+    0 0 36px rgb(95 209 230 / 45%),
+    0 0 62px rgb(200 16 46 / 33%);
+}
+
+.logo-orb::before,
+.logo-orb::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 999px;
+  border: 1px solid rgb(200 16 46 / 60%);
+  animation: orbit 5s linear infinite;
+}
+
+.logo-orb::after {
+  inset: -15px;
+  border-color: rgb(95 209 230 / 35%);
+  animation-duration: 7s;
+  animation-direction: reverse;
+}
+
+.eve-shell {
+  background:
+    radial-gradient(circle at 25% 20%, rgb(255 255 255 / 88%), rgb(95 209 230 / 38%) 45%, rgb(13 14 16) 73%),
+    linear-gradient(165deg, rgb(255 255 255 / 10%), rgb(255 255 255 / 2%));
+  box-shadow:
+    inset 0 0 0 2px rgb(255 255 255 / 18%),
+    0 0 28px rgb(95 209 230 / 26%);
+}
+
+.eve-float {
+  animation: eve-float 3s ease-in-out infinite;
+}
+
+.eve-eye {
+  width: 11px;
+  height: 18px;
+  border-radius: 999px;
+  background: linear-gradient(to bottom, #9defff, #62d7ee);
+  box-shadow: 0 0 16px rgb(95 209 230 / 75%);
+}
+
+.scanline {
+  position: relative;
+}
+
+.scanline::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 5px,
+    rgb(95 209 230 / 5%) 6px
+  );
+}
+
+@keyframes orbit {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes node-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.72;
+  }
+
+  50% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+}
+
+@keyframes eve-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes helix {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-ring {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.03);
+    opacity: 1;
+  }
+}
