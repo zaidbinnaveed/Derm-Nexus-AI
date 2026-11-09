@@ -1,66 +1,83 @@
 # Derm Nexus AI
 
-An academic deep-learning project for seven-class skin-lesion image classification, with a PyTorch training pipeline, Flask inference API, and Next.js interface.
+**A seven-class skin-lesion image classifier with an end-to-end pipeline: PyTorch training, a Flask inference API, and a Next.js interface.**
 
-> **Important:** This repository is an educational prototype, not a medical device or diagnostic service. Predictions can be wrong and must not replace evaluation by a qualified clinician.
+![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?logo=pytorch&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?logo=flask&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-000000?logo=nextdotjs&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-## What is implemented
+> **Not a medical device.** This is an academic prototype. Predictions can be wrong and must never replace evaluation by a qualified clinician.
 
-- Dataset loading and augmentation utilities
-- EfficientNet-B3 classifier adapted for seven HAM10000-style classes
-- Training and evaluation scripts
-- Flask image-inference endpoint returning the top three class probabilities
-- Next.js interface for uploading an image and reviewing model output
-- Optional OpenAI-backed explanatory chat with a safe fallback when no key is configured
+## Overview
 
-## Evidence and current limitations
+Derm Nexus fine-tunes an ImageNet-pretrained EfficientNet-B3 on HAM10000-style dermoscopy images across seven classes, serves the model behind a Flask endpoint that returns the top-3 class probabilities, and presents the result in a Next.js interface with an optional explanatory chat.
 
-The committed training history records a peak validation accuracy of approximately **55.3%** and a final recorded validation accuracy of approximately **53.9%**. Those results are suitable for coursework and iteration, not clinical use.
+**Classes:** actinic keratoses, basal cell carcinoma, benign keratosis, dermatofibroma, melanoma, melanocytic nevi, vascular lesions.
 
-The interface's highlighted image regions are presentation overlays derived from class predictions; they are **not** produced by a lesion-localization or segmentation model. The project should not be described as locating suspicious tissue.
+## Results
 
-## Repository layout
+| Metric | Value |
+| --- | --- |
+| Peak validation accuracy | **55.3%** |
+| Final validation accuracy | 53.9% |
+| Epochs recorded | 21 |
+
+Source: [`models/training_history.json`](models/training_history.json). These are coursework-level results on an imbalanced dataset; accuracy alone is not an adequate metric here (see *Limitations*).
+
+## Training approach
+
+- **Backbone:** EfficientNet-B3 (torchvision, ImageNet weights) with a new two-layer classification head.
+- **Two-phase fine-tuning:** 10 epochs with the backbone frozen (lr 1e-3), then 15 epochs unfrozen with cosine-annealed learning rate.
+- **Augmentation:** Albumentations pipeline for geometric and color variation.
+
+## Getting started
+
+**Prerequisites:** Python 3.11, Node.js 18+.
+
+```bash
+git clone https://github.com/zaidbinnaveed/Derm-Nexus-AI.git
+cd Derm-Nexus-AI
+
+pip install -r requirements.txt      # inference API and training code
+npm run install:all                  # frontend dependencies
+npm run dev                          # http://localhost:3000
+```
+
+Start the inference API in another terminal:
+
+```bash
+python app/app.py
+```
+
+On first start the API downloads the trained weights. The optional chat needs `OPENAI_API_KEY` in `frontend/.env.local` (see `frontend/.env.example`); without it the app shows a safe fallback message.
+
+To retrain:
+
+```bash
+python src/train.py
+python src/evaluate.py
+```
+
+## Project structure
 
 ```text
-Ann Project/
-├── src/                 # dataset, model, training, evaluation
-├── models/              # committed training history
-├── app/                 # Flask inference service
-├── frontend/            # Next.js interface and chat route
-├── requirements.txt     # Python dependencies
-├── render.yaml          # backend deployment configuration
-└── package.json         # workspace launcher scripts
+src/                  dataset, model, training, and evaluation code
+models/               committed training history
+app/app.py            Flask inference API (top-3 probabilities)
+frontend/             Next.js interface and chat route
+scripts/              dev launcher
+docs/                 project report and frontend notes
+render.yaml           API deployment config (Render)
 ```
 
-## Run locally
+## Limitations
 
-From `Ann Project/`:
+- Validation accuracy is modest; per-class precision and recall, calibration, and subgroup analysis (e.g., across skin tones) have not been evaluated.
+- The highlighted regions in the interface are presentation overlays derived from the predicted class. **They are not produced by a localization or segmentation model.**
+- Confidence scores are softmax outputs, not calibrated clinical risk.
 
-```bash
-npm run install:all
-```
+## License
 
-Create `frontend/.env.local` only if you want the optional explanatory chat:
-
-```bash
-OPENAI_API_KEY=your_key
-```
-
-Then start the workspace:
-
-```bash
-npm run dev
-```
-
-The interface is available at [http://localhost:3000](http://localhost:3000).
-
-## Model classes
-
-The classifier covers actinic keratoses, basal cell carcinoma, benign keratosis, dermatofibroma, melanoma, melanocytic nevi, and vascular lesions.
-
-## Responsible-use boundary
-
-- Do not use the output to diagnose, rule out, or treat a condition.
-- Do not present confidence scores as calibrated medical risk.
-- Seek professional review for concerning or changing skin lesions.
-- A production research path would require stronger validation, calibration, subgroup analysis, clinical review, privacy controls, and regulatory assessment.
+[MIT](LICENSE) © Zaid Bin Naveed
